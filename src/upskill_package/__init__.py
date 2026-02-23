@@ -1,5 +1,3 @@
-from upskill_package.core import core_hello
+from upskill_package.connection import SharePointSiteConn
 
-def init_hello() -> str:
-    return "Hello from init!"
-
+__all__ = ["SharePointSiteConn"]
