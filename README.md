@@ -1,11 +1,12 @@
 # upskill-package
 
-Data load package for Google Sheets
+Simple connector for reading public Google Sheets as CSV.
 
 ## Features
 
-- No authentication dependency: working on vetted Google Sheets link
-- Load Google Sheets data in different format
+- No authentication required — works with any publicly shared Google Sheet
+- Fetch data as raw CSV, list of rows, or list of dictionaries
+- Lightweight — only depends on `httpx`
 
 ## Installation
 
@@ -26,31 +27,22 @@ dependencies = [
 ## Usage
 
 ```python
-from upskill_package import SharePointSiteConn
+from upskill_package import GoogleSheetsConnector
 
-conn = SharePointSiteConn(
-    site_url="https://yourorg.sharepoint.com/sites/yoursite",
-    client_id="your-client-id",
-    client_secret="your-client-secret",
-    tenant_id="your-tenant-id",
-    drive_name="Documents",
-)
+connector = GoogleSheetsConnector(sheet_id="your-sheet-id")
 
-# List files in a folder
-files = conn.list_files_in_folder("General/Reports")
+# Fetch as a list of dictionaries (first row = headers)
+rows = connector.fetch_as_dicts()
 
-# Download a file
-content = conn.download_file("drive/root:/General/Reports/report.xlsx")
+# Fetch as a list of lists
+rows = connector.fetch_as_rows()
 
-# Upload a file
-with open("local_file.xlsx", "rb") as f:
-    conn.upload_file("General/Reports/local_file.xlsx", f.read())
+# Fetch raw CSV string
+csv_text = connector.fetch_raw()
 
-# Delete a file
-conn.delete_file("General/Reports/old_report.xlsx")
-
-# Copy a file to another folder
-conn.copy_file("General/Reports/report.xlsx", "/General/Archive")
+# Fetch a specific worksheet by name
+connector = GoogleSheetsConnector(sheet_id="your-sheet-id", sheet_name="Sheet2")
+rows = connector.fetch_as_dicts()
 ```
 
 ## Development
