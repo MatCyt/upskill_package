@@ -1,3 +1,3 @@
-from upskill_package.connection import SharePointSiteConn
+from upskill_package.sheet_connection import GoogleSheetsConnector
 
-__all__ = ["SharePointSiteConn"]
+__all__ = ["GoogleSheetsConnector"]
