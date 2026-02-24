@@ -1,11 +1,11 @@
 # upskill-package
 
-Utility package for SharePoint file operations via the Microsoft Graph API.
+Data load package for Google Sheets
 
 ## Features
 
-- Authenticate using Azure AD client credentials (OAuth2)
-- Download, upload, delete, copy, and list files in SharePoint document libraries
+- No authentication dependency: working on vetted Google Sheets link
+- Load Google Sheets data in different format
 
 ## Installation
 
